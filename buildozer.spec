@@ -42,7 +42,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy, numpy, pillow
+requirements = python3, kivy, numpy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -109,6 +109,7 @@ fullscreen = 0
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
+# lite rt next needs android.api = 35
 android.api = 35
 
 # (int) Minimum API your APK / AAB will support.
@@ -194,7 +195,9 @@ android.api = 35
 # Either form may be used, and assets need not be in 'source.include_exts'.
 # 1) android.add_assets = source_asset_relative_path
 # 2) android.add_assets = source_asset_path:destination_asset_relative_path
-android.add_assets = model_working.tflite, model_not_working.tflite
+
+#put your model here so it is stored in the asset dirctory
+android.add_assets = my_model.tflite
 
 # (list) Put these files or directories in the apk res directory.
 # The option may be used in three ways, the value may contain one or zero ':'
@@ -209,7 +212,7 @@ android.add_assets = model_working.tflite, model_not_working.tflite
 #android.add_resources =
 
 # (list) Gradle dependencies to add
-android.gradle_dependencies = com.google.ai.edge.litert:litert:2.0.0-alpha
+android.gradle_dependencies = com.google.ai.edge.litert:litert:2.0.1-alpha
 
 # (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
 # contains an 'androidx' package, or any package from Kotlin source.

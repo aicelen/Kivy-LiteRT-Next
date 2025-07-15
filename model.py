@@ -68,3 +68,6 @@ if platform =='android':
             result = buf_out.readFloat()
             
             return result
+
+else:
+    raise RuntimeError("Only Android is supported")

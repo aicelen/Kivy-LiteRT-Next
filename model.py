@@ -1,5 +1,4 @@
 from kivy.utils import platform
-from time import time
 
 if platform =='android':
     from jnius import autoclass
@@ -49,21 +48,3 @@ if platform =='android':
             except:
                 print('except')
                 pass
-    
-else:
-    class TensorFlowModel:
-        def __init__(self, model_filename, num_threads=None, use_gpu=False):
-            from tensorflow import lite as tflite
-            self.interpreter = tflite.Interpreter(model_filename,
-                                                   num_threads=num_threads)
-            self.interpreter.allocate_tensors()
-
-        def run_inference(self, x):
-            # assumes one input and one output for now
-            print(self.interpreter.get_input_details())
-
-            self.interpreter.set_tensor(
-                self.interpreter.get_input_details()[0]['index'], x)
-            self.interpreter.invoke()
-            return self.interpreter.get_tensor(
-                self.interpreter.get_output_details()[0]['index'])

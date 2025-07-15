@@ -2,9 +2,8 @@ from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from model import TensorFlowModel
-from PIL import Image
 import numpy as np
-from time import time
+
 
 class MyApp(App):
     def build(self):
@@ -27,37 +26,14 @@ class MyApp(App):
         return layout
     
     def test_model(self, instance):
-        print("Button was pressed!")
-        model = "model_working.tflite"
+        """
+        Example method
+        """
+        model = TensorFlowModel("my_model.tflite", use_gpu=True)
+        data = np.random.randint(0, 100, size=(5, 5)) # use your data
+        out = model.run_inference(data)
+        print(out)
 
-        if model == "model_working.tflite":
-            model = TensorFlowModel(model)
-
-            image = Image.open('test.png')
-            image = image.convert('L') 
-            image = image.resize((40, 70), Image.NEAREST)
-            input_data = np.array(image).astype(np.float32)
-            input_data = np.expand_dims(input_data, axis=0)  # [height, width, channels] -> [1, height, width, channels]
-            input_data = np.expand_dims(input_data, axis=-1)  # [1, height, width] -> [1, height, width, 1]
-            a = time()
-            out = model.run_inference(input_data)
-            print(time()-a)
-            print(out)
-
-        else:
-            model = TensorFlowModel(model)
-
-            image = Image.open('test.png')
-            image = image.convert('RGB')
-            input_data = np.array(image).astype(np.float32)
-            input_data = np.expand_dims(input_data, axis=0)  # [height, width, channels] -> [1, height, width, channels]
-            print(input_data.shape)
-            print('starting')
-            a = time()
-            out = model.run_inference(input_data)
-            print(time()-a)
-
-        
 
 # Run the app
 if __name__ == '__main__':

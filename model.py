@@ -15,12 +15,23 @@ if platform =='android':
 
 
     class TensorFlowModel():
-        def __init__(self, model_path, accelerator=Accelerator.CPU):
+        """
+        Class for inference of a .tflite model using LiteRT Next (version 2.0.1:alpha)
+        Args:
+            model_name(str):
+        """
+        def __init__(self, model_name: str, use_gpu: bool = True):
+            
+            if use_gpu:
+                acc = Accelerator.GPU
+            else:
+                acc = Accelerator.CPU
+
             accelerator_set = HashSet()
-            accelerator_set.add(accelerator)
+            accelerator_set.add(acc)
             opts = Options(accelerator_set)
 
-            self.model = CompiledModel.create(context.getAssets(), model_path, opts)
+            self.model = CompiledModel.create(context.getAssets(), model_name, opts)
 
             self.input_buffers = self.model.createInputBuffers()
             self.output_buffers = self.model.createOutputBuffers()

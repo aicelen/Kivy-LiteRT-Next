@@ -7,6 +7,10 @@ https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2976
 
 https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8908
 
+If you want to run .tflite models in production, I'd recomend you to use this:
+
+https://github.com/teticio/kivy-tensorflow-helloworld
+
 LiteRT-Next provides easy state-of-the-art GPU acceleration granting huge performance uplifts compared to LiteRT.
 This is the first example of using GPU acceleration for a .tflite model in Kivy. Compared to CPU (on LiteRT) it is around 2 times faster.
 
